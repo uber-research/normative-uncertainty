@@ -1,0 +1,4 @@
+{
+  "voting": "variance",
+  "theories": "[{\"pushed_deaths\":-40,\"collateral_deaths\":-10, 'lies': -5, 'doomsday': -50},{\"deaths\": -1, 'doomsday': -30}]"
+}

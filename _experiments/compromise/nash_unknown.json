@@ -1,0 +1,6 @@
+{
+  "voting": "nash",
+  "level": "double",
+  "rand_adv": "True",
+  "theories": "[{\"pushed_deaths\":-4,\"collateral_deaths\":-1, 'lies': -0.5, 'doomsday': -10},{\"deaths\": -1, 'doomsday': -300},{\"pushed_deaths\":-1,\"collateral_deaths\":-4, 'lies': -0.5, 'doomsday': -10}]"
+}

@@ -1,0 +1,5 @@
+{
+  "voting": "variance",
+  "level": "doomsday",
+  "sarsa_eps": 0.01
+}

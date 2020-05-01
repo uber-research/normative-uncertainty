@@ -1,0 +1,5 @@
+{
+  "voting": "nash",
+  "level": "double",
+  "n_sequential": 2
+}
