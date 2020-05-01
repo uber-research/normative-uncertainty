@@ -64,11 +64,6 @@ def run(timesteps, n_on_track, n_credences, processes=1):
         for file in glob.glob(base + '*.png') + glob.glob(base + '*.pdf'):
             outfile = f'{resdir}/{f}/{file.split("__")[-1]}'
             open(outfile, 'wb').write(open(file, 'rb').read())
-            if '.pdf' in outfile:
-                subprocess.run([
-                    'pdfcrop',
-                    outfile
-                ])
-
+            
 if __name__ == '__main__':
     fire.Fire(run)
