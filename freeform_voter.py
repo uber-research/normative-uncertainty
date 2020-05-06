@@ -2,7 +2,7 @@
 
 # Licensed under the Uber Non-Commercial License (the "License");
 # you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at the root directory of this project. 
+# You may obtain a copy of the License at the root directory of this project.
 
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -388,13 +388,13 @@ class RollingMeanOfStd:
                 return default
             else:
                 assert False, 'Requesting a mean with 0 samples'
-        return self.sum / self.n
+        return np.sqrt(self.sum / self.n)
 
     def add(self, v):
-        self.sum += v
+        self.sum += v**2
         self.n += 1
         if self.max_n is not None:
-            self.rolling.append(v)
+            self.rolling.append(v**2)
             while self.n > self.max_n:
                 self.sum -= self.rolling.popleft()
                 self.n -= 1
@@ -410,7 +410,7 @@ class VarianceNet(nn.Module):
     def forward(self, x):
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
-        return self.fc3(x)
+        return torch.exp(self.fc3(x))
 
 
 class LearnedVariance:
@@ -423,7 +423,7 @@ class LearnedVariance:
 
     def add(self, credences, v):
         self.batch_x.append(credences)
-        self.batch_y.append([v])
+        self.batch_y.append([v**2])
         if len(self.batch_x) > self.batch_size:
             self.optimizer.zero_grad()
             values = self.net(torch.Tensor(self.batch_x))
@@ -436,7 +436,7 @@ class LearnedVariance:
 
     def mean_std(self, credences):
         res = self.net(torch.Tensor(credences))
-        return res.detach().numpy()[0]
+        return np.sqrt(res.detach().numpy()[0])
 
     def save_data(self):
         return self.net.state_dict()
